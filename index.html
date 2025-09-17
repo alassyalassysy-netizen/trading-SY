@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading SY</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+</head>
+<body>
+
+<h1>Trading SY</h1>
+
+<div class="container">
+  <!-- القوائم الجانبية -->
+  <div class="sidebar">
+    <h3>العملات</h3>
+    <div id="coinsItems"></div>
+    <div class="add-item">
+      <input type="text" id="coinInput" placeholder="أدخل اسم العملة">
+      <button onclick="addItem('coin')">إضافة</button>
+    </div>
+
+    <h3>الأسهم</h3>
+    <div id="stocksItems"></div>
+    <div class="add-item">
+      <input type="text" id="stockInput" placeholder="أدخل اسم السهم">
+      <button onclick="addItem('stock')">إضافة</button>
+    </div>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="main-content">
+    <!-- التبويبات -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openTab(event,'price')">الأسعار والشارت</button>
+      <button class="tab-btn" onclick="openTab(event,'news')">الأخبار</button>
+      <button class="tab-btn" onclick="openTab(event,'comments')">التعليقات</button>
+      <button class="tab-btn" onclick="openTab(event,'prediction')">التنبؤ</button>
+    </div>
+
+    <!-- محتوى التبويبات -->
+    <div id="price" class="tab-content">
+      <select id="pricePeriod" onchange="updateChartPeriod()">
+        <option value="daily">يومي</option>
+        <option value="weekly">أسبوعي</option>
+        <option value="monthly">شهري</option>
+      </select>
+      <canvas id="priceChart"></canvas>
+    </div>
+
+    <div id="news" class="tab-content">
+      <div id="newsList">اختر عملة أو سهم لتظهر الأخبار هنا.</div>
+      <button class="api-button" onclick="fetchNews()">تحديث الأخبار</button>
+    </div>
+
+    <div id="comments" class="tab-content">
+      <div class="add-item">
+        <textarea id="commentInput" rows="2" placeholder="اكتب تعليقك هنا"></textarea>
+        <button onclick="addComment()">إرسال</button>
+      </div>
+      <div id="commentList">لا توجد تعليقات بعد.</div>
+    </div>
+
+    <div id="prediction" class="tab-content">
+      <button class="api-button" onclick="setPrediction('صعود')">صعود</button>
+      <button class="api-button" onclick="setPrediction('هبوط')">هبوط</button>
+      <div id="currentPrediction">لا يوجد توقع بعد</div>
+      <div id="predictionStats">لا توجد بيانات</div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
